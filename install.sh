@@ -29,30 +29,29 @@ echo "╚═══════════════════════�
 echo ""
 
 # ─── 下載 Skills ───
-FILES=(
-  "skills/UIFlow/SKILL.md"
-  "skills/CBD/SKILL.md"
-  "skills/CAD/SKILL.md"
-  "skills/UIFlow/PROJECT.template.md"
+# 格式：repo 路徑|本地路徑（相對於 .claude/skills/）
+DOWNLOADS=(
+  "skills/UIFlow/SKILL.md|UIFlow/SKILL.md"
+  "skills/CBD/SKILL.md|CBD/SKILL.md"
+  "skills/CAD/SKILL.md|CAD/SKILL.md"
+  "skills/UIFlow/PROJECT.template.md|UIFlow/PROJECT.md"
 )
 
-for f in "${FILES[@]}"; do
-  dir="${SKILLS_DIR}/$(dirname "$f")"
-  mkdir -p "$dir"
-  target="${SKILLS_DIR}/${f}"
-  # PROJECT.template.md → PROJECT.md（不覆蓋已有的）
-  if [[ "$f" == *"PROJECT.template.md" ]]; then
-    target="${SKILLS_DIR}/UIFlow/PROJECT.md"
-    if [[ -f "$target" ]]; then
-      info "PROJECT.md 已存在，跳過（不覆蓋你的專案設定）"
-      continue
-    fi
+for entry in "${DOWNLOADS[@]}"; do
+  src="${entry%%|*}"
+  dest="${entry##*|}"
+  target="${SKILLS_DIR}/${dest}"
+  mkdir -p "$(dirname "$target")"
+  # PROJECT.md 不覆蓋已有的
+  if [[ "$dest" == *"PROJECT.md" ]] && [[ -f "$target" ]]; then
+    info "PROJECT.md 已存在，跳過（不覆蓋你的專案設定）"
+    continue
   fi
-  info "下載 ${f}..."
-  if curl -sfL "${REPO_RAW}/${f}" -o "$target"; then
+  info "下載 ${dest}..."
+  if curl -sfL "${REPO_RAW}/${src}" -o "$target"; then
     ok "$(basename "$target")"
   else
-    fail "下載失敗：${f}（請確認 repo 存在且 public）"
+    fail "下載失敗：${src}（請確認 repo 存在且 public）"
   fi
 done
 

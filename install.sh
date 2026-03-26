@@ -2,9 +2,9 @@
 set -euo pipefail
 
 # ─── UIFlow Skills 一鍵安裝 ───
-# 用法：bash <(curl -sL https://raw.githubusercontent.com/baobao-group/claude-uiflow-skills/main/install.sh)
+# 用法：bash <(curl -sL https://raw.githubusercontent.com/yellowchen001234-a11y/claude-uiflow-skills/main/install.sh)
 
-REPO_RAW="https://raw.githubusercontent.com/baobao-group/claude-uiflow-skills/main"
+REPO_RAW="https://raw.githubusercontent.com/yellowchen001234-a11y/claude-uiflow-skills/main"
 SKILLS_DIR=".claude/skills"
 
 C_RESET="\033[0m"

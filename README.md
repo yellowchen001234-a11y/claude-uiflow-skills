@@ -5,7 +5,7 @@
 ## 一鍵安裝
 
 ```bash
-bash <(curl -sL https://raw.githubusercontent.com/baobao-group/claude-uiflow-skills/main/install.sh)
+bash <(curl -sL https://raw.githubusercontent.com/yellowchen001234-a11y/claude-uiflow-skills/main/install.sh)
 ```
 
 > 在你的專案目錄下執行。自動裝好 Skills + 設好 Figma MCP + 建好 Plugin 骨架。
